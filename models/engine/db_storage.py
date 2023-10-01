@@ -11,7 +11,9 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
+
 from os import getenv
+
 import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -50,6 +52,22 @@ class DBStorage:
                     key = obj.__class__.__name__ + '.' + obj.id
                     new_dict[key] = obj
         return (new_dict)
+
+    def get(self, cls, id):
+        """retrive a specific id"""
+        if cls is None or id is None:
+            return None
+
+        return self.__session.query(cls).filter_by(id=id).first()
+
+    def count(self, cls=None):
+        if cls is None:
+            count = 0
+            for i in classes.values():
+                count += len(self.__session.query(cls).all())
+            return count
+        else:
+            return len(self.__session.query(cls).all())
 
     def new(self, obj):
         """add the object to the current database session"""
