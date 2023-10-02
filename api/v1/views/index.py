@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Module with api routes"""
+""" Module with api routes """
 
 from flask import jsonify
 
