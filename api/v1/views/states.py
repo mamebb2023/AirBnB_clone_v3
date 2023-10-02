@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Module with api routes for all State object functionality"""
+""" Module with api routes for all State object functionality """
 
 from flask import abort, jsonify, make_response, request
 
@@ -10,7 +10,7 @@ from models.state import State
 
 @app_views.route("/states", strict_slashes=False)
 def list_states():
-    all_states = map(lambda state_obj: state_obj.to_dict(),
+    all_states = map(lambda x: x.to_dict(),
                      storage.all(State).values())
 
     return jsonify(list(all_states))
